@@ -9,7 +9,7 @@ const MarqueePortfolio = () => {
   const repeatedProjects = [...projects, ...projects];
 
   return (
-    <div className="relative overflow-hidden w-full py-12">
+    <div className="relative overflow-hidden w-full py-6">
       <motion.div
         className="absolute top-4 left-0 p-4 dark:bg-neutral-900 bg-pink-500 flex gap-12 text-3xl font-bold text-white dark:text-pink-400"
         animate={{ x: ["0%", "-50%"] }} // brand tetap ke kiri

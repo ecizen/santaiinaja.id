@@ -20,7 +20,7 @@ const itemVariants:any = {
 const HeroSection = () => {
   return (
     <motion.div
-      className="py-8 px-4 sm:px-8 w-full flex flex-col items-center overflow-hidden"
+      className="lg:py-8 py-6 px-4 sm:px-8 w-full flex flex-col items-center overflow-hidden"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

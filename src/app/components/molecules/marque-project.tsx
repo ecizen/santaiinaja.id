@@ -20,7 +20,7 @@ const MarqueePortfolio = () => {
         ))}
       </motion.div>
       <motion.div
-        className="flex gap-6 w-max mt-16"
+        className="flex gap-6 w-max mt-20"
         animate={{ x: ["-50%", "0%"] }} // direction ke kanan
         transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 16, ease: "linear" } }}
       >

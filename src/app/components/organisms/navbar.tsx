@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <>
       <header className="dark:bg-neutral-950 bg-white sticky top-0 z-30">
-        <nav className="w-full px-8 py-6  flex items-center justify-between">
+        <nav className="w-full lg:px-8 px-6 py-6  flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Image src={images.light_dark} width={18} height={18} loading="lazy" alt="logo"/>
             <h1 className="text-md font-semibold">

@@ -4,6 +4,7 @@ import Container from "./components/atoms/container";
 import HeroSection from "./components/organisms/hero";
 import OurService from "./components/organisms/service";
 import TestimonialMarquee from "./components/organisms/testiomnial";
+import JourneyWorkflow from "./components/organisms/workflow";
 
 export default function MainPage() {
   return (
@@ -15,8 +16,8 @@ export default function MainPage() {
         <section id="service">
           <OurService/>
         </section>
-        <section id="testimonial">
-          {/* <TestimonialMarquee/> */}
+        <section id="workflow">
+          <JourneyWorkflow/>
         </section>
       </main>
     </Container>

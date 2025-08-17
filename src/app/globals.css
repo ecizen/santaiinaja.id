@@ -3,7 +3,282 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #eb3891; /* pink-500 */
+  --secondary: #f472b6; /* pink-400 */
+  --accent: #f9a8d4; 
+  --dark: #1A1C2A;
+  --light: #F9F9FF;
+  --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.journeyContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .journeyContainer {
+    padding-left: 1rem; 
+    padding-right: 1rem; 
+    padding-top: 2rem;     
+    padding-bottom: 2rem;  
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #111827; /* bg-neutral-950 */
+    --foreground: #F9F9FF;
+    --primary: #eb3891;
+    --secondary: #f472b6;
+    --accent: #f9a8d4;
+  }
+
+  body, .journeyContainer {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Step Card */
+  .step {
+    background: rgba(17, 24, 39, 0.7); /* semi-transparent dark bg */
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .step:hover {
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .step::before {
+    opacity: 0.5;
+  }
+
+  /* Line & dots */
+  .journeyLine {
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--primary) 20%,
+      var(--secondary) 50%,
+      var(--accent) 80%,
+      transparent 100%);
+  }
+
+  .journeyLine::before, .journeyLine::after {
+    box-shadow: 0 0 15px var(--primary);
+  }
+
+  /* Floating shapes */
+  .shape1 { background: #eb3891; }
+  .shape2 { background: #f472b6; }
+  .shape3 { background: #f9a8d4; }
+}
+/* Header */
+.journeyHeader {
+  text-align: center;
+  margin-bottom: 6rem;
+  position: relative;
+  z-index: 2;
+}
+
+.journeyTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.journeySubtitle {
+  font-size: 1rem;
+  opacity: 0.8;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Path & Line */
+.journeyPath {
+  position: relative;
+  height: auto;
+  margin: 0 auto;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 4px 1fr;
+  gap: 5rem 4rem;
+  align-items: start;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.journeyLine {
+  grid-column: 2 / 3;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      var(--primary) 20%,
+      var(--secondary) 50%,
+      var(--accent) 80%,
+      transparent 100%);
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  align-self: stretch;
+}
+
+.journeyLine::before,
+.journeyLine::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+  z-index: 3;
+}
+
+.journeyLine::before { top: -8px; }
+.journeyLine::after { bottom: -8px; background: var(--accent); }
+
+@keyframes linePulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Step Card */
+.step {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  background: rgba(26, 28, 42, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  z-index: 2;
+  transition: var(--transition);
+  transform-style: preserve-3d;
+}
+
+.step:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.step1 { grid-column: 1 / 2; grid-row: 1; justify-self: end; margin-right: 2rem; transform: rotate(-2deg); }
+.step2 { grid-column: 3 / 4; grid-row: 2; justify-self: start; margin-left: 2rem; transform: rotate(2deg); }
+.step3 { grid-column: 1 / 2; grid-row: 3; justify-self: end; margin-right: 2rem; transform: rotate(-1deg); }
+.step4 { grid-column: 3 / 4; grid-row: 4; justify-self: start; margin-left: 2rem; transform: rotate(1deg); }
+
+/* Step Content */
+.stepNumber {
+  width: 50px; height: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-radius: 12px;
+  display: flex; justify-content: center; align-items: center;
+  font-weight: 700; font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 20px rgba(108, 77, 246, 0.3);
+}
+
+.stepTitle {
+  font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stepDesc {
+  font-size: 1.1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 1.5rem;
+}
+
+.stepIcon { width: 60px; height: 60px; margin-bottom: 1.5rem; opacity: 0.9; }
+
+.floatingShapes {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+
+
+
+@keyframes float {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(50px,-50px) rotate(180deg); }
+  100% { transform: translate(0,0) rotate(360deg); }
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px); 
+  opacity: 0;      
+  animation: float 20s infinite linear; 
+}
+
+.shape1 { width: 300px; height: 300px; background: #eb3891; top: 10%; left: 10%; animation-delay: 0s; }
+.shape2 { width: 400px; height: 400px; background: #f472b6; top: 30%; right: 10%; animation-delay: 3s; }
+.shape3 { width: 250px; height: 250px; background: #f9a8d4; bottom: 20%; left: 15%; animation-delay: 6s; }
+/* Responsive */
+@media (max-width: 1200px) {
+  .journeyPath { grid-template-columns: 1fr; gap: 3rem; padding: 0; }
+  .journeyLine { display: none; }
+  .step { grid-column: auto !important; grid-row: auto !important; justify-self: center !important; transform: none !important; margin: 0 !important; width: 100%; max-width: 500px; }
+}
+
+@media (max-width: 768px) {
+  .journeyTitle { font-size: 2.5rem; }
+  .journeySubtitle { font-size: 1rem; }
+  .stepTitle { font-size: 1.5rem; }
+  .stepDesc { font-size: 1rem; }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1A1C2A;
+    --foreground: #F9F9FF;
+    --primary: #eb3891;
+    --secondary: #f472b6;
+    --accent: #f9a8d4;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  .step::before { opacity: 0.3; }
+}
+
+
 
 @theme inline {
   --color-background: var(--background);
@@ -21,6 +296,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+
 body {
   background: var(--background);
   color: var(--foreground);
